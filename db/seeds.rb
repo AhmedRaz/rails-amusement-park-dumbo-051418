@@ -6,7 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+User.destroy_all
+Attraction.destroy_all
+Ride.all.destroy_all
 DATA = {
   :user_keys =>
     ["name", "nausea", "happiness", "tickets", "height", "password"],
@@ -22,7 +24,7 @@ DATA = {
     ["Quvenzhané Wallis", 2, 2, 13, 30, "password"]
   ],
   :attraction_keys =>
-   ["name", "nausea_rating", "happiness_rating", "tickets", "min_height"],
+   ["name", "min_height", "nausea_rating", "happiness_rating", "tickets"],
   :attractions => [
     ["Scrambler Ride", 2, 2, 2, 36],
     ["Miniature Railroad", 0, 1, 2, 32],
@@ -74,6 +76,7 @@ def make_attractions_and_rides
       new_attraction.users << customers[rand(0...customers.length)]
     end
     new_attraction.users.each {|c| c.save}
+    # binding.pry
     new_attraction.save
   end
 end
